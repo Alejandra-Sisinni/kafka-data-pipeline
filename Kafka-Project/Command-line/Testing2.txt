@@ -1,0 +1,29 @@
+Create a Topic with multiple partitions
+        ./kafka-topics.sh \
+            --bootstrap-server localhost:29092 \
+            --create \
+            --topic kafka.project.test2 \
+            --partitions 3 \
+            --replication-factor 1
+
+Check topic partitioning
+        ./kafka-topics.sh \
+            --bootstrap-server localhost:29092 \
+            --topic kafka.project.test2 \
+            --describe
+
+Publishing Messages to Topics with keys
+        ./kafka-console-producer.sh \
+            --bootstrap-server localhost:29092 \
+            --property "parse.key=true" \
+            --property "key.separator=:" \
+            --topic kafka.project.test2
+
+Consuming messages using consumer group
+        ./kafka-console-consumer.sh \
+            --bootstrap-server localhost:29092 \
+            --topic kafka.project.test2 \
+            --group test-project-group \
+            --property print.key=true \
+            --property key.separator=" = " \
+            --from-beginning

@@ -1,0 +1,41 @@
+Logging into the Kafka Container
+        docker exec -it kafka-broker /bin/bash 
+
+Navigate to the Kafka Scripts directory
+        cd /opt/bitnami/kafka/bin
+
+Creating new Topics
+        ./kafka-topics.sh \
+            --bootstrap-server localhost:29092 \
+            --create \
+            --topic kafka.project.test1 \
+            --partitions 1 \
+            --replication-factor 1
+
+        ./kafka-topics.sh \
+            --bootstrap-server localhost:29092 \
+            --create \
+            --topic kafka.project.test1 \
+            --partitions 1 \
+            --replication-factor 1
+
+Listing Topics
+        ./kafka-topics.sh \
+            --bootstrap-server localhost:29092 \
+            --list
+
+Getting details about a Topic
+        ./kafka-topics.sh \
+            --bootstrap-server localhost:29092 \
+            --describe
+
+Publishing Messages to Topics
+        ./kafka-console-producer.sh \
+            --bootstrap-server localhost:29092 \
+            --topic kafka.project.test1
+
+Consuming Messages from Topics
+        ./kafka-console-consumer.sh \
+            --bootstrap-server localhost:29092 \
+            --topic kafka.project.test1 \
+            --from-beginning

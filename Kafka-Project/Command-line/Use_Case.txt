@@ -1,0 +1,36 @@
+Create a topic: kafka.usecase.topic
+    Partitions = 2
+    Replication factor = 1
+Publish messages to the topic using the console producer. Consume them using the console consumer
+Create a Java producer and consumer for this topic, execute and review the results
+
+Creating the Topic
+        ./kafka-topics.sh \
+            --bootstrap-server localhost:29092 \
+            --create \
+            --topic kafka.usecase.topic \
+            --partitions 2 \
+            --replication-factor 1
+
+Describe the Topic
+        ./kafka-topics.sh \
+            --bootstrap-server localhost:29092 \
+            --topic kafka.usecase.topic \
+            --describe
+
+Publish to the Topic #ID:Value
+        ./kafka-console-producer.sh \
+            --bootstrap-server localhost:29092 \
+            --property "parse.key=true" \
+            --property "key.separator=:" \
+            --topic kafka.usecase.topic
+
+Consume Message from the Topic
+        ./kafka-console-consumer.sh \
+            --bootstrap-server localhost:29092 \
+            --topic kafka.usecase.topic \
+            --group usecase-project-group \
+            --property print.key=true \
+            --property key.separator=" = " \
+            --from-beginning
+
